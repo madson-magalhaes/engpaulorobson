@@ -43,40 +43,40 @@
 }
 
 :root {
-  /* Paleta INSS - Escura com Destaques Amarelo/Verde Neon */
-  --primary: #FFD700;
-  --primary-foreground: #1a1a2e;
-  --sidebar-primary: #FFD700;
-  --sidebar-primary-foreground: #1a1a2e;
-  --chart-1: #FFD700;
-  --chart-2: #00FF41;
-  --chart-3: #9D4EDD;
-  --chart-4: #00D9FF;
-  --chart-5: #FF006E;
-  --radius: 0.65rem;
-  --background: #1a1a2e;
-  --foreground: #FFFFFF;
-  --card: #1a1a2e;
-  --card-foreground: #FFFFFF;
-  --popover: #1a1a2e;
-  --popover-foreground: #FFFFFF;
-  --secondary: #00FF41;
-  --secondary-foreground: #1a1a2e;
-  --muted: #CCCCCC;
-  --muted-foreground: #666666;
-  --accent: #FFD700;
-  --accent-foreground: #1a1a2e;
-  --destructive: #FF006E;
+  /* Paleta Modernizada - Estilo Prátice Hub (Premium Escuro + Dourado) */
+  --primary: #EAB308; /* Dourado Premium */
+  --primary-foreground: #020617; /* Slate escuro para contraste */
+  --sidebar-primary: #EAB308;
+  --sidebar-primary-foreground: #020617;
+  --chart-1: #EAB308;
+  --chart-2: #F59E0B;
+  --chart-3: #D97706;
+  --chart-4: #B45309;
+  --chart-5: #92400E;
+  --radius: 1rem;
+  --background: #020617; /* Fundo hiper escuro Slate 950 */
+  --foreground: #F8FAFC; /* Slate 50 para texto claro e legível */
+  --card: #0F172A; /* Slate 900 para cards */
+  --card-foreground: #F8FAFC;
+  --popover: #0F172A;
+  --popover-foreground: #F8FAFC;
+  --secondary: #1E293B; /* Slate 800 */
+  --secondary-foreground: #F8FAFC;
+  --muted: #334155; /* Slate 700 */
+  --muted-foreground: #94A3B8; /* Slate 400 para texto secundário */
+  --accent: #EAB308;
+  --accent-foreground: #020617;
+  --destructive: #EF4444; /* Vermelho padrão para erros */
   --destructive-foreground: #FFFFFF;
-  --border: #00FF41;
-  --input: #2a2a3e;
-  --ring: #FFD700;
-  --sidebar: #1a1a2e;
-  --sidebar-foreground: #FFFFFF;
-  --sidebar-accent: #FFD700;
-  --sidebar-accent-foreground: #1a1a2e;
-  --sidebar-border: #00FF41;
-  --sidebar-ring: #FFD700;
+  --border: #1E293B; /* Bordas sutis */
+  --input: #1E293B;
+  --ring: #EAB308;
+  --sidebar: #0F172A;
+  --sidebar-foreground: #F8FAFC;
+  --sidebar-accent: #1E293B;
+  --sidebar-accent-foreground: #F8FAFC;
+  --sidebar-border: #1E293B;
+  --sidebar-ring: #EAB308;
 }
 
 @layer base {
@@ -102,6 +102,10 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Kanit', sans-serif;
     font-weight: 700;
+  }
+  
+  button, input, select, textarea {
+    font-family: 'Kanit', sans-serif;
   }
 }
 
@@ -134,32 +138,122 @@
     }
   }
 
-  /* Componentes customizados para INSS */
+  @keyframes pulse-gold {
+    0% {
+      box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.4);
+      transform: scale(1);
+    }
+    50% {
+      box-shadow: 0 0 35px 5px rgba(234, 179, 8, 0.3);
+      transform: scale(1.02);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(234, 179, 8, 0);
+      transform: scale(1);
+    }
+  }
+
+  @keyframes shine {
+    0% { left: -100%; }
+    20% { left: 200%; }
+    100% { left: 200%; }
+  }
+
+  /* Componentes customizados Modernizados com Efeitos Intensos */
   .btn-primary {
-    @apply px-8 py-4 bg-primary text-primary-foreground font-bold rounded-full uppercase text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg border-2 border-dashed border-secondary;
+    @apply px-10 md:px-14 py-4 md:py-6 bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-950 font-black rounded-full uppercase text-base md:text-[20px] tracking-widest transition-all duration-300 border-none relative overflow-hidden flex items-center justify-center text-center whitespace-normal h-auto leading-tight;
+    font-family: 'Kanit', sans-serif;
+    animation: pulse-gold 2.5s infinite;
+  }
+  
+  .btn-primary:hover {
+    @apply scale-[1.05] brightness-110;
+    box-shadow: 0 0 40px rgba(234, 179, 8, 0.6) !important;
+    animation: none; /* Para a pulsação para dar estabilidade no click */
+  }
+
+  .btn-primary::after {
+    content: '';
+    @apply absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-[-25deg];
+    animation: shine 4s infinite cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .btn-outline {
+    @apply px-8 py-4 bg-transparent border border-white/20 text-white font-bold rounded-full uppercase text-sm tracking-wide transition-all duration-300 hover:bg-white/5 hover:border-white/40;
   }
 
   .section-dark {
-    @apply bg-background text-foreground py-20;
+    @apply bg-background text-foreground py-24 relative overflow-hidden;
   }
 
   .section-light {
-    @apply bg-white text-background py-20;
+    @apply bg-slate-50 text-slate-900 py-24 relative overflow-hidden;
   }
 
   .headline {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight;
+    @apply text-4xl md:text-5xl lg:text-[4rem] font-bold leading-[1.1] tracking-tight;
+    font-family: 'Kanit', sans-serif;
   }
 
   .subheadline {
-    @apply text-lg md:text-xl text-muted leading-relaxed;
+    @apply text-lg md:text-xl text-muted-foreground leading-relaxed font-light;
   }
 
   .highlight-yellow {
-    @apply text-primary font-bold;
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-500;
   }
 
-  .highlight-green {
-    @apply text-secondary font-bold;
+  .glass-card {
+    @apply bg-white/[0.03] border border-white/10 backdrop-blur-md rounded-2xl md:rounded-[2rem] shadow-2xl;
   }
+
+  .pill-badge {
+    @apply inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-bold tracking-wider text-yellow-500 uppercase backdrop-blur-sm;
+  }
+}
+
+/* Utilities for glowing backgrounds */
+.glow-bg {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(234,179,8,0.08) 0%, rgba(2,6,23,0) 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+/* Infinite Scroll Animations - DESKTOP ONLY */
+@media (min-width: 1024px) {
+  @keyframes scroll-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @keyframes scroll-right {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+  }
+
+  .animate-scroll-left-desktop {
+    animation: scroll-left 40s linear infinite;
+  }
+
+  .animate-scroll-right-desktop {
+    animation: scroll-right 40s linear infinite;
+  }
+
+  .pause-on-hover:hover {
+    animation-play-state: paused !important;
+  }
+}
+
+/* Utilitários para esconder scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
