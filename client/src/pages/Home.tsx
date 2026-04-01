@@ -12,6 +12,14 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const WHATSAPP_LINK = "https://wa.me/5585987244624?text=Quero%20saber%20mais%20da%20regulariza%C3%A7%C3%A3o%20de%20INSS%20e%20receber%20meu%20diagn%C3%B3stico%20gratuito.";
 
+const TESTIMONIAL_VIDEOS = [
+  { id: "c0re4dk8nYg" },
+  { id: "DWLi__1Jegs" },
+  { id: "VbnNtVBaVWg" },
+  { id: "4-kg4nhpo_U" },
+  { id: "fstYQND6hRY" },
+];
+
 const CASE_VIDEOS = [
   { id: "qaNoHWSm4kw", title: "CASO 1", subtitle: "REDUÇÃO DRÁSTICA (75%)" },
   { id: "uIHgt-ILl6s", title: "CASO 2", subtitle: "ECONOMIA VALIDADA" },
@@ -47,7 +55,9 @@ export default function Home() {
   const [laptopScrollProgress, setLaptopScrollProgress] = useState(0);
   const [isDesktop, setIsDesktop] = useState(typeof window !== "undefined" ? window.innerWidth >= 768 : true);
   const [showCookieConsent, setShowCookieConsent] = useState(false);
-  const [playingVideoId, setPlayingVideoId] = useState<string | null>(null);
+  const [playingVideoKey, setPlayingVideoKey] = useState<string | null>(null);
+  const [isDemoPlaying, setIsDemoPlaying] = useState(false);
+  const [isTutorialPlaying, setIsTutorialPlaying] = useState(false);
 
   useEffect(() => {
     const consent = localStorage.getItem("cookie-consent");
@@ -84,8 +94,21 @@ export default function Home() {
         }
       }
     };
+
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024); // lg: breakpoint is 1024px in default tailwind
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+    
+    // Initial call
+    handleResize();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (
@@ -198,16 +221,44 @@ export default function Home() {
         {/* GRÁFICO COMPARATIVO MOBILE (DARK THEME) */}
         {/* MOCKUP IPHONE MOBILE (Substitui o Gráfico) */}
         <div className="container px-4 lg:hidden mb-12 relative z-20 flex justify-center">
-          <div className="relative w-[280px] h-[580px] bg-slate-900 rounded-[3rem] border-[10px] border-slate-950 shadow-[0_20px_60px_rgba(2,6,23,0.5)] overflow-hidden transition-transform duration-500 hover:scale-[1.02] cursor-pointer ring-2 ring-white/5">
+          <div
+            onClick={() => setIsDemoPlaying(true)}
+            className="relative w-[280px] h-[580px] bg-slate-900 rounded-[3rem] border-[10px] border-slate-950 shadow-[0_20px_60px_rgba(2,6,23,0.5)] overflow-hidden transition-transform duration-500 hover:scale-[1.02] cursor-pointer ring-2 ring-white/5 group"
+          >
             {/* Dynamic Island */}
             <div className="absolute top-3 left-1/2 -translate-x-1/2 w-[90px] h-6 bg-black rounded-full z-30 flex justify-end items-center pr-3">
               <div className="w-1.5 h-1.5 rounded-full bg-slate-800"></div>
             </div>
+
             {/* Tela de Vídeo */}
-            <div className="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center group-hover:bg-slate-900 transition-colors z-10">
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-transparent"></div>
-              <Play className="w-20 h-20 text-amber-500 opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 drop-shadow-[0_0_15px_rgba(234,179,8,0.5)] z-20" fill="currentColor" />
-              <p className="mt-5 text-white/50 font-medium tracking-widest uppercase text-[10px] z-20">Reproduzir Demonstração</p>
+            <div className="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center transition-colors z-10">
+              {isDemoPlaying && !isDesktop ? (
+                <div className="absolute inset-0 w-full h-full overflow-hidden">
+                  <div className="absolute inset-0 scale-[1.1] origin-center">
+                    <iframe
+                      src={`https://www.youtube.com/embed/94zZdAkMh-M?autoplay=1&modestbranding=1&rel=0&iv_load_policy=3&controls=0&disablekb=1&loop=1&playlist=94zZdAkMh-M`}
+                      className="w-full h-full pointer-events-none"
+                      allow="autoplay; encrypted-media"
+                    />
+                  </div>
+                  {/* Overlay to stop/close */}
+                  <div
+                    className="absolute inset-0 z-20"
+                    onClick={(e) => { e.stopPropagation(); setIsDemoPlaying(false); }}
+                  ></div>
+                </div>
+              ) : (
+                <div className="w-full h-full relative flex flex-col items-center justify-center group/card">
+                  <img
+                    src={`https://img.youtube.com/vi/94zZdAkMh-M/maxresdefault.jpg`}
+                    className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                    alt="Capa do Vídeo"
+                  />
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
+                  <Play className="w-20 h-20 text-amber-500 opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 drop-shadow-[0_0_15px_rgba(234,179,8,0.5)] z-20" fill="currentColor" />
+                  <p className="mt-5 text-white/90 font-bold tracking-widest uppercase text-[10px] z-20 border-b border-white/30 pb-1">Assista à Demonstração</p>
+                </div>
+              )}
             </div>
             {/* Barra de Home IOS */}
             <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-28 h-1 bg-white/20 rounded-full z-30"></div>
@@ -233,8 +284,8 @@ export default function Home() {
 
                 {/* Destaque Modernizado Claro */}
                 <div className="bg-slate-50 border border-slate-100 border-l-4 border-l-amber-500 p-6 md:p-8 rounded-xl shadow-[0_4px_25px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-shadow cursor-default">
-                  <p className="text-4xl font-black text-slate-900 leading-tight">De R$ 13 Mil <br /><span className="text-amber-500 text-3xl">por apenas 4x de R$ 160</span></p>
-                  <p className="text-xs md:text-sm tracking-widest uppercase text-slate-400 mt-3 font-bold">Baseado em caso real validado no CNO</p>
+                  <p className="text-4xl font-black text-slate-900 leading-tight">De R$ 13.000,00 <br /><span className="text-amber-500 text-3xl">por apenas 5x de R$ 160,00</span></p>
+                  <p className="text-xs md:text-sm tracking-widest uppercase text-slate-400 mt-3 font-bold">Baseado em caso real validado no SERO</p>
                 </div>
 
                 <p>
@@ -246,20 +297,47 @@ export default function Home() {
             {/* Direita: Mockup iPhone Desktop (Substitui o Gráfico) */}
             <div className="hidden lg:flex justify-center items-center relative">
               <div className="absolute -inset-10 bg-amber-100 blur-[120px] rounded-full pointer-events-none opacity-40"></div>
-              
-              <div className="relative w-[320px] h-[660px] bg-slate-900 rounded-[3.5rem] border-[12px] border-slate-950 shadow-[0_40px_100px_rgba(2,6,23,0.6)] overflow-hidden transition-all duration-700 hover:scale-[1.03] cursor-pointer ring-4 ring-white/5 group">
+
+              <div
+                onClick={() => setIsDemoPlaying(true)}
+                className="relative w-[320px] h-[660px] bg-slate-900 rounded-[3.5rem] border-[12px] border-slate-950 shadow-[0_40px_100px_rgba(2,6,23,0.6)] overflow-hidden transition-all duration-700 hover:scale-[1.03] cursor-pointer ring-4 ring-white/5 group"
+              >
                 {/* Dynamic Island */}
                 <div className="absolute top-4 left-1/2 -translate-x-1/2 w-[110px] h-8 bg-black rounded-full z-30 flex justify-end items-center pr-4 shadow-inner">
                   <div className="w-2.5 h-2.5 rounded-full bg-slate-800"></div>
                 </div>
-                
+
                 {/* Tela de Vídeo */}
-                <div className="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center group-hover:bg-slate-900 transition-colors z-10">
-                  <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-transparent"></div>
-                  <Play className="w-24 h-24 text-amber-500 opacity-90 group-hover:opacity-100 group-hover:scale-[1.10] transition-all duration-300 drop-shadow-[0_0_20px_rgba(234,179,8,0.4)] z-20" fill="currentColor" />
-                  <p className="mt-8 text-white/60 font-bold tracking-[0.2em] uppercase text-xs z-20 border-b border-white/10 pb-2">Assista à Demonstração</p>
+                <div className="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center transition-colors z-10">
+                  {isDemoPlaying && isDesktop ? (
+                    <div className="absolute inset-0 w-full h-full overflow-hidden">
+                      <div className="absolute inset-0 scale-[1.1] origin-center">
+                        <iframe
+                          src={`https://www.youtube.com/embed/94zZdAkMh-M?autoplay=1&modestbranding=1&rel=0&iv_load_policy=3&controls=0&disablekb=1&loop=1&playlist=94zZdAkMh-M`}
+                          className="w-full h-full pointer-events-none"
+                          allow="autoplay; encrypted-media"
+                        />
+                      </div>
+                      {/* Overlay to stop/close */}
+                      <div
+                        className="absolute inset-0 z-20"
+                        onClick={(e) => { e.stopPropagation(); setIsDemoPlaying(false); }}
+                      ></div>
+                    </div>
+                  ) : (
+                    <div className="w-full h-full relative flex flex-col items-center justify-center group/card">
+                      <img
+                        src={`https://img.youtube.com/vi/94zZdAkMh-M/maxresdefault.jpg`}
+                        className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                        alt="Capa do Vídeo"
+                      />
+                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
+                      <Play className="w-24 h-24 text-amber-500 opacity-90 group-hover:opacity-100 group-hover:scale-[1.10] transition-all duration-300 drop-shadow-[0_0_20px_rgba(234,179,8,0.4)] z-20" fill="currentColor" />
+                      <p className="mt-8 text-white/90 font-bold tracking-[0.2em] uppercase text-xs z-20 border-b border-white/30 pb-2">Assista à Demonstração</p>
+                    </div>
+                  )}
                 </div>
-                
+
                 {/* Barra de Home IOS */}
                 <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-40 h-1.5 bg-white/20 rounded-full z-30"></div>
               </div>
@@ -353,16 +431,36 @@ export default function Home() {
                 >
                   <div className="flex gap-4 md:gap-6 animate-scroll-right-desktop pause-on-hover w-max lg:w-max lg:snap-none">
                     {/* Duplicando o array apenas para o desktop (loop infinito) */}
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8].map((item, idx) => (
+                    {[...TESTIMONIAL_VIDEOS, ...TESTIMONIAL_VIDEOS].map((video, idx) => (
                       <div
-                        key={`${item}-${idx}`}
+                        key={`${video.id}-${idx}`}
                         className="w-[260px] sm:w-[280px] md:w-[320px] snap-center lg:snap-align-none glass-card p-2 group/card hover:border-yellow-500/50 transition-colors duration-500 cursor-pointer"
                       >
                         <div className="aspect-[9/16] bg-slate-900 rounded-[1.5rem] flex items-center justify-center relative overflow-hidden shadow-2xl">
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                          <div className="w-20 h-20 rounded-full glass-card bg-black/40 flex items-center justify-center border-white/20 group-hover/card:bg-yellow-500 group-hover/card:border-yellow-400 group-hover/card:scale-110 transition-all duration-300 z-10 shadow-2xl">
-                            <Play className="w-8 h-8 text-white fill-white ml-1" />
-                          </div>
+                          {playingVideoKey === `testimonial-${idx}` ? (
+                            <div className="absolute inset-0 w-full h-full overflow-hidden">
+                              <div className="absolute inset-0 w-full h-full scale-[1.1] origin-center">
+                                <iframe 
+                                  src={`https://www.youtube.com/embed/${video.id}?autoplay=1&modestbranding=1&rel=0&iv_load_policy=3&controls=0&disablekb=1&widgetid=1`} 
+                                  className="w-full h-full pointer-events-none"
+                                  allow="autoplay; encrypted-media"
+                                />
+                              </div>
+                              <div className="absolute inset-0 z-20 cursor-pointer" onClick={(e) => { e.stopPropagation(); setPlayingVideoKey(null); }}></div>
+                            </div>
+                          ) : (
+                            <div className="w-full h-full relative flex items-center justify-center" onClick={() => setPlayingVideoKey(`testimonial-${idx}`)}>
+                              <img 
+                                src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`} 
+                                className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity"
+                                alt="Depoimento Cliente"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                              <div className="w-20 h-20 rounded-full glass-card bg-black/40 flex items-center justify-center border-white/20 group-hover/card:bg-yellow-500 group-hover/card:border-yellow-400 group-hover/card:scale-110 transition-all duration-300 z-10 shadow-2xl">
+                                <Play className="w-8 h-8 text-white fill-white ml-1" />
+                              </div>
+                            </div>
+                          )}
                         </div>
                       </div>
                     ))}
@@ -412,9 +510,9 @@ export default function Home() {
                         className="w-[260px] sm:w-[280px] md:w-[320px] snap-center lg:snap-align-none glass-card p-2 group/card hover:border-red-500/50 transition-colors duration-500 cursor-pointer relative"
                       >
                         <div className="aspect-[9/16] bg-slate-900 rounded-[1.5rem] flex items-center justify-center relative overflow-hidden shadow-2xl">
-                          {playingVideoId === video.id ? (
-                            <div className="absolute inset-0 w-full h-full overflow-hidden"> 
-                              <div className="absolute inset-0 w-full h-full scale-[1.3] origin-center">
+                          {playingVideoKey === `case-${idx}` ? (
+                            <div className="absolute inset-0 w-full h-full overflow-hidden">
+                              <div className="absolute inset-0 w-full h-full scale-[1.1] origin-center">
                                 <iframe 
                                   src={`https://www.youtube.com/embed/${video.id}?autoplay=1&modestbranding=1&rel=0&iv_load_policy=3&controls=0&disablekb=1&widgetid=1`} 
                                   className="w-full h-full pointer-events-none"
@@ -424,13 +522,13 @@ export default function Home() {
                               {/* Overlay de fechar/pausa simples: clicar no vídeo fecha ele */}
                               <div 
                                 className="absolute inset-0 z-20 cursor-pointer" 
-                                onClick={(e) => { e.stopPropagation(); setPlayingVideoId(null); }}
+                                onClick={(e) => { e.stopPropagation(); setPlayingVideoKey(null); }}
                               ></div>
                             </div>
                           ) : (
-                            <div className="w-full h-full relative flex items-center justify-center" onClick={() => setPlayingVideoId(video.id)}>
+                            <div className="w-full h-full relative flex items-center justify-center" onClick={() => setPlayingVideoKey(`case-${idx}`)}>
                               <img 
-                                src={`https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`} 
+                                src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`} 
                                 className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity"
                                 alt="Depoimento INSS"
                               />
@@ -483,7 +581,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-red-600/5 blur-[120px] pointer-events-none"></div>
         <div className="container relative z-10">
           <div className="flex flex-col items-center text-center space-y-12">
-            
+
             {/* Topo: Texto Centralizado */}
             <div className="max-w-3xl space-y-6 md:space-y-10 animate-fade-in-up flex flex-col items-center mb-8 md:mb-12">
               <div className="pill-badge border-red-500/30 text-red-400 bg-red-500/10">
@@ -518,7 +616,7 @@ export default function Home() {
 
             {/* Baixo: Carrossel de Prints (Estilo Seção 5) */}
             <div className="w-full max-w-[1400px] mx-auto relative group/parent overflow-hidden">
-              <div 
+              <div
                 ref={carousel3Ref}
                 className="w-full overflow-x-auto no-scrollbar snap-x snap-mandatory lg:overflow-visible"
               >
@@ -531,8 +629,8 @@ export default function Home() {
                         >
                           <div className="glass-card p-2 hover:border-red-500/50 transition-all duration-500">
                             <div className="aspect-[9/16] bg-slate-900 rounded-[1.5rem] flex items-center justify-center relative overflow-hidden shadow-2xl">
-                              <img 
-                                src={`/inss-de-obras/${item}.png`} 
+                              <img
+                                src={`/inss-de-obras/${item}.png`}
                                 className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover/card:opacity-100 group-hover/card:scale-105 transition-all duration-500"
                                 alt={`Alerta e-CAC ${item}`}
                               />
@@ -543,8 +641,8 @@ export default function Home() {
                       </DialogTrigger>
                       <DialogContent className="max-w-[95vw] sm:max-w-4xl p-0 bg-black/90 border-white/10 overflow-hidden sm:rounded-2xl">
                         <div className="relative aspect-auto max-h-[90vh] flex items-center justify-center">
-                          <img 
-                            src={`/inss-de-obras/${item}.png`} 
+                          <img
+                            src={`/inss-de-obras/${item}.png`}
                             className="max-w-full max-h-[90vh] object-contain"
                             alt="Alerta Ampliado"
                           />
@@ -562,13 +660,13 @@ export default function Home() {
 
               {/* Setas de Controle - Apenas Mobile */}
               <div className="flex lg:hidden items-center justify-center gap-6 mt-2 relative z-30">
-                <button 
+                <button
                   onClick={() => scrollManual(carousel3Ref, 'left')}
                   className="w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white active:scale-95 transition-transform"
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
-                <button 
+                <button
                   onClick={() => scrollManual(carousel3Ref, 'right')}
                   className="w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white active:scale-95 transition-transform"
                 >
@@ -622,17 +720,18 @@ export default function Home() {
                          MOCKUP DESKTOP (MacBook Style) Animado e Responsivo
                      ----------------------------------- */}
                 <div
-                  className="hidden md:flex flex-col items-center w-full cursor-pointer transition-transform duration-700 hover:scale-[1.02]"
-                  style={{ transformStyle: 'preserve-3d', maxWidth: 'min(800px, 90vw, 75vh)' }}
+                  className="flex flex-col items-center w-full cursor-pointer transition-transform duration-700 hover:scale-[1.02]"
+                  style={{ transformStyle: 'preserve-3d', maxWidth: 'min(800px, 95vw, 75vh)' }}
+                  onClick={() => setIsTutorialPlaying(true)}
                 >
 
                   {/* Tampa Superior (Tela) com Animação 3D de Abertura */}
                   <div
-                    className="relative w-full aspect-[16/10] bg-slate-800 rounded-t-[1.5rem] border-[12px] border-slate-800 shadow-[0_-20px_50px_rgba(0,0,0,0.15)] overflow-hidden ring-1 ring-white/10 z-20"
+                    className="relative w-full aspect-[16/10] bg-slate-800 rounded-t-[1.5rem] border-[8px] md:border-[12px] border-slate-800 shadow-[0_-20px_50px_rgba(0,0,0,0.15)] overflow-hidden ring-1 ring-white/10 z-20"
                     style={{
                       transformOrigin: "bottom center",
                       // A tampa inicia levemente tombada para trás (-95deg) para dar o efeito que está fechada na base
-                      transform: `rotateX(${-95 + (laptopScrollProgress * 95)}deg)`,
+                      transform: isDesktop ? `rotateX(${-95 + (laptopScrollProgress * 95)}deg)` : `rotateX(0deg)`,
                       transition: "transform 0.05s ease-out"
                     }}
                   >
@@ -642,37 +741,44 @@ export default function Home() {
                         <div className="w-0.5 h-0.5 rounded-full bg-blue-400"></div>
                       </div>
                     </div>
-                    {/* Imagem/Vídeo Placeholder do e-CAC */}
-                    <div className="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center group-hover:bg-slate-900 transition-colors z-10">
-                      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent"></div>
-                      <Play className="w-24 h-24 text-yellow-500 opacity-90 group-hover:opacity-100 group-hover:scale-[1.15] transition-all duration-300 drop-shadow-[0_0_15px_rgba(234,179,8,0.5)] z-20" fill="currentColor" />
-                      <p className="mt-6 text-white/50 font-medium tracking-widest uppercase text-sm z-20">Clique para reproduzir o tutorial</p>
+                    
+                    {/* Tela de Vídeo */}
+                    <div className="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center transition-colors z-10">
+                      {isTutorialPlaying ? (
+                         <div className="absolute inset-0 w-full h-full overflow-hidden">
+                           <div className="absolute inset-0 scale-[1.001] origin-center">
+                             <iframe 
+                               src={`https://www.youtube.com/embed/dUrGldvhOdc?autoplay=1&modestbranding=1&rel=0&iv_load_policy=3&controls=0&disablekb=1&loop=1&playlist=dUrGldvhOdc`} 
+                               className="w-full h-full pointer-events-none"
+                               allow="autoplay; encrypted-media"
+                             />
+                           </div>
+                           {/* Overlay to stop/close */}
+                           <div 
+                             className="absolute inset-0 z-20" 
+                             onClick={(e) => { e.stopPropagation(); setIsTutorialPlaying(false); }}
+                           ></div>
+                         </div>
+                      ) : (
+                        <div className="w-full h-full relative flex flex-col items-center justify-center group/card">
+                          <img 
+                            src={`https://img.youtube.com/vi/dUrGldvhOdc/maxresdefault.jpg`} 
+                            className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                            alt="Tutorial e-CAC"
+                          />
+                          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
+                          <Play className="w-16 h-16 md:w-24 md:h-24 text-yellow-500 opacity-90 group-hover:opacity-100 group-hover:scale-[1.15] transition-all duration-300 drop-shadow-[0_0_15px_rgba(234,179,8,0.5)] z-20" fill="currentColor" />
+                          <p className="mt-4 md:mt-6 text-white/90 font-bold tracking-widest uppercase text-[10px] md:text-sm z-20 border-b border-white/20 pb-2">Assista ao Tutorial</p>
+                        </div>
+                      )}
                     </div>
                   </div>
 
                   {/* Base do Notebook com chanfro */}
-                  <div className="w-[110%] h-6 bg-gradient-to-b from-slate-300 to-slate-400 rounded-b-2xl shadow-2xl flex justify-center z-10 relative">
-                    <div className="w-1/4 h-2 bg-slate-500/30 rounded-b-md absolute top-0"></div>
+                  <div className="w-[110%] h-4 md:h-6 bg-gradient-to-b from-slate-300 to-slate-400 rounded-b-2xl shadow-2xl flex justify-center z-10 relative">
+                    <div className="w-1/4 h-1 md:h-2 bg-slate-500/30 rounded-b-md absolute top-0"></div>
                     <div className="absolute top-0 w-full h-[1px] bg-slate-200/50"></div>
                   </div>
-                </div>
-
-                {/* ---------------------------------
-                         MOCKUP MOBILE (iPhone Style) (Sem Animação Rígida)
-                     ----------------------------------- */}
-                <div className="md:hidden relative w-[290px] h-[600px] bg-slate-800 rounded-[3rem] border-[12px] border-slate-800 shadow-[0_20px_50px_rgba(0,0,0,0.3)] overflow-hidden transition-transform duration-500 hover:scale-[1.03] cursor-pointer ring-4 ring-slate-200/50">
-                  {/* Dynamic Island */}
-                  <div className="absolute top-3 left-1/2 -translate-x-1/2 w-[100px] h-7 bg-black rounded-full z-30 flex justify-end items-center pr-3 shadow-inner">
-                    <div className="w-2 h-2 rounded-full bg-slate-800"></div>
-                  </div>
-                  {/* Tela Placeholder do e-CAC */}
-                  <div className="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center group-hover:bg-slate-900 transition-colors z-10">
-                    <div className="absolute top-0 w-full h-20 bg-gradient-to-b from-white/5 to-transparent"></div>
-                    <Play className="w-20 h-20 text-yellow-500 opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 drop-shadow-[0_0_15px_rgba(234,179,8,0.5)] z-20" fill="currentColor" />
-                    <p className="mt-5 text-white/50 font-medium tracking-widest uppercase text-[11px] z-20">Reproduzir Tutorial</p>
-                  </div>
-                  {/* Barra de Home IOS */}
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1.5 bg-white/20 rounded-full z-30"></div>
                 </div>
 
               </div>
