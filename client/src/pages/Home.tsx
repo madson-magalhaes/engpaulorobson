@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { ChevronRight, ChevronLeft, CheckCircle, AlertCircle, Play, Instagram, Linkedin, Mail, MessageCircle, ShieldCheck, X } from "lucide-react";
+import { motion } from "framer-motion";
+import { ChevronRight, ChevronLeft, CheckCircle, AlertCircle, Play, Instagram, Linkedin, Mail, MessageCircle, ShieldCheck, X, Search } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { Link } from "wouter";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
@@ -119,7 +120,7 @@ export default function Home() {
         {/* IMAGEM MOBILE EXCLUSIVA */}
         <div
           className="w-full h-[50vh] min-h-[400px] lg:hidden bg-cover bg-top bg-no-repeat relative z-0"
-          style={{ backgroundImage: "url('hero-01-mobile.jpg')" }}
+          style={{ backgroundImage: "url('hero-01-mobile.webp')" }}
         >
           {/* Sombra para integrar suavemente a foto com o fundo escuro abaixo */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/20 to-transparent"></div>
@@ -128,7 +129,7 @@ export default function Home() {
         {/* IMAGEM DESKTOP EXCLUSIVA */}
         <div
           className="hidden lg:block absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('background-hero.jpg')" }}
+          style={{ backgroundImage: "url('background-hero.webp')" }}
         >
           {/* Fundo mantido em design original: Sem overlay de gradiente, pois a imagem natural já possui fundo escuro para leitura */}
         </div>
@@ -136,7 +137,7 @@ export default function Home() {
         <div className="container relative z-10 mt-[-40px] lg:mt-0 pt-10 lg:pt-0 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-6 md:space-y-8 animate-fade-in-up text-center lg:text-left flex flex-col items-center lg:items-start">
-              <img src="logo-pratice.png" alt="Prátice Group" className="w-[320px] md:w-[380px] h-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.05)] mb-2" />
+              <img src="logo-pratice.webp" alt="Prátice Group" className="w-[320px] md:w-[380px] h-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.05)] mb-2" />
 
               <div className="pill-badge">
                 <span className="w-2 h-2 rounded-full bg-yellow-400 mr-2 animate-pulse"></span>
@@ -150,8 +151,8 @@ export default function Home() {
                 Você já sabe quanto pode economizar no imposto da CND do INSS de obras?
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
-                  <Button className="btn-primary" style={{ width: 'fit-content' }}>Quero Descobrir agora</Button>
+                <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-custom-wrapper">
+                  <Button className="btn-primary">Quero Descobrir agora</Button>
                 </a>
               </div>
             </div>
@@ -169,12 +170,12 @@ export default function Home() {
       <section className="relative bg-[#020617] pt-0 lg:py-32 overflow-hidden flex flex-col lg:block">
 
         {/* IMAGEM MOBILE (Topo Isolado) */}
-        <div className="w-full h-[40vh] min-h-[300px] lg:hidden bg-cover bg-center relative" style={{ backgroundImage: "url('bg-problema-obra.jpg')" }}>
+        <div className="w-full h-[40vh] min-h-[300px] lg:hidden bg-cover bg-center relative" style={{ backgroundImage: "url('bg-problema-obra.webp')" }}>
           <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/50 to-transparent"></div>
         </div>
 
         {/* IMAGEM DESKTOP (Esquerda Edge-to-Edge) */}
-        <div className="hidden lg:block absolute left-0 top-0 w-1/2 h-full bg-cover bg-center" style={{ backgroundImage: "url('bg-problema-obra.jpg')" }}>
+        <div className="hidden lg:block absolute left-0 top-0 w-1/2 h-full bg-cover bg-center" style={{ backgroundImage: "url('bg-problema-obra.webp')" }}>
           {/* Fade escuro impecável fundindo o lado direito da foto escura com o resto do site */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#020617]/50 to-[#020617]"></div>
         </div>
@@ -205,8 +206,8 @@ export default function Home() {
               </div>
 
               <div className="pt-6">
-                <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
-                  <Button className="btn-primary" style={{ width: 'fit-content' }}>Descobrir minha economia</Button>
+                <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-custom-wrapper">
+                  <Button className="btn-primary">Descobrir minha economia</Button>
                 </a>
               </div>
             </div>
@@ -231,35 +232,15 @@ export default function Home() {
             </div>
 
             {/* Tela de Vídeo */}
-            <div className="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center transition-colors z-10">
-              {isDemoPlaying && !isDesktop ? (
+            <div className="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center z-10">
                 <div className="absolute inset-0 w-full h-full overflow-hidden">
-                  <button 
-                    onClick={(e) => { e.stopPropagation(); setIsDemoPlaying(false); }}
-                    className="absolute top-4 right-4 z-[30] w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center backdrop-blur-md border border-white/20 active:scale-95 transition-all shadow-xl"
-                  >
-                    <X className="w-6 h-6" />
-                  </button>
-                  <div className="absolute inset-0 scale-[1.1] origin-center">
-                    <iframe
-                      src={`https://www.youtube.com/embed/94zZdAkMh-M?autoplay=1&playsinline=1&enablejsapi=1&modestbranding=1&rel=0&iv_load_policy=3&controls=0&disablekb=1&loop=1&playlist=94zZdAkMh-M`}
-                      className="w-full h-full"
-                      allow="autoplay; encrypted-media"
-                    />
-                  </div>
-                </div>
-              ) : (
-                <div className="w-full h-full relative flex flex-col items-center justify-center group/card">
-                  <img
-                    src={`https://img.youtube.com/vi/94zZdAkMh-M/maxresdefault.jpg`}
-                    className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"
-                    alt="Capa do Vídeo"
+                  <iframe
+                    src={`https://www.youtube.com/embed/94zZdAkMh-M?controls=1&modestbranding=0&rel=0&iv_load_policy=3&disablekb=0`}
+                    className="w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
                   />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
-                  <Play className="w-20 h-20 text-amber-500 opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 drop-shadow-[0_0_15px_rgba(234,179,8,0.5)] z-20" fill="currentColor" />
-                  <p className="mt-5 text-white/90 font-bold tracking-widest uppercase text-[10px] z-20 border-b border-white/30 pb-1">Assista à Demonstração</p>
                 </div>
-              )}
             </div>
             {/* Barra de Home IOS */}
             <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-28 h-1 bg-white/20 rounded-full z-30"></div>
@@ -309,35 +290,15 @@ export default function Home() {
                 </div>
 
                 {/* Tela de Vídeo */}
-                <div className="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center transition-colors z-10">
-                  {isDemoPlaying && isDesktop ? (
+                <div className="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center z-10">
                     <div className="absolute inset-0 w-full h-full overflow-hidden">
-                      <button 
-                         onClick={(e) => { e.stopPropagation(); setIsDemoPlaying(false); }}
-                         className="absolute top-20 right-6 z-[30] w-12 h-12 rounded-full bg-black/60 text-white flex items-center justify-center backdrop-blur-md border border-white/20 hover:bg-black/80 transition-all shadow-2xl"
-                      >
-                        <X className="w-8 h-8" />
-                      </button>
-                      <div className="absolute inset-0 scale-[1.1] origin-center">
-                        <iframe
-                          src={`https://www.youtube.com/embed/94zZdAkMh-M?autoplay=1&playsinline=1&enablejsapi=1&modestbranding=1&rel=0&iv_load_policy=3&controls=0&disablekb=1&loop=1&playlist=94zZdAkMh-M`}
-                          className="w-full h-full"
-                          allow="autoplay; encrypted-media"
-                        />
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="w-full h-full relative flex flex-col items-center justify-center group/card">
-                      <img
-                        src={`https://img.youtube.com/vi/94zZdAkMh-M/maxresdefault.jpg`}
-                        className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"
-                        alt="Capa do Vídeo"
+                      <iframe
+                        src={`https://www.youtube.com/embed/94zZdAkMh-M?controls=1&modestbranding=0&rel=0&iv_load_policy=3&disablekb=0`}
+                        className="w-full h-full"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
                       />
-                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
-                      <Play className="w-24 h-24 text-amber-500 opacity-90 group-hover:opacity-100 group-hover:scale-[1.10] transition-all duration-300 drop-shadow-[0_0_20px_rgba(234,179,8,0.4)] z-20" fill="currentColor" />
-                      <p className="mt-8 text-white/90 font-bold tracking-[0.2em] uppercase text-xs z-20 border-b border-white/30 pb-2">Assista à Demonstração</p>
                     </div>
-                  )}
                 </div>
 
                 {/* Barra de Home IOS */}
@@ -348,12 +309,17 @@ export default function Home() {
         </div>
 
         {/* BOTÃO ISOLADO E CENTRALIZADO NO BOTTOM */}
-        <div className="w-full flex justify-center mt-12 lg:mt-20">
-          <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
-            <Button className="btn-primary transform scale-[1.10] shadow-[0_15px_40px_rgba(234,179,8,0.35)]">
-              Quero meu diagnóstico
-            </Button>
-          </a>
+        <div className="w-full flex justify-center mt-12 lg:mt-32">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.45, ease: "easeOut" }}
+            className="btn-custom-wrapper"
+          >
+            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
+              <Button className="btn-primary">Quero meu diagnóstico</Button>
+            </a>
+          </motion.div>
         </div>
       </section>
 
@@ -366,7 +332,7 @@ export default function Home() {
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[700px] h-[350px] md:h-[700px] bg-white/10 blur-[120px] rounded-full animate-pulse z-0 pointer-events-none"></div>
 
               {/* Imagem do Paulo Robson (Tamanho 100% real sem cortes) */}
-              <img src="paulo-robson-hero.png" alt="Eng. Paulo Robson" className="relative w-full max-w-[550px] h-auto z-10 drop-shadow-2xl scale-105" />
+              <img src="paulo-robson-hero.webp" alt="Eng. Paulo Robson" className="relative w-full max-w-[550px] h-auto z-10 drop-shadow-2xl scale-105" />
 
               {/* Título Base fluindo naturalmente abaixo da foto */}
               <div className="relative z-20 pt-6 w-full text-center">
@@ -393,7 +359,7 @@ export default function Home() {
                 ))}
               </div>
               <div className="pt-4">
-                <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
+                <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-custom-wrapper">
                   <Button className="btn-primary">Falar com Paulo Robson</Button>
                 </a>
               </div>
@@ -429,45 +395,22 @@ export default function Home() {
               <div className="relative group/parent">
                 <div
                   ref={carousel1Ref}
-                  className="w-full overflow-x-auto no-scrollbar snap-x snap-mandatory lg:overflow-visible"
+                  className="w-full overflow-hidden no-scrollbar lg:overflow-visible"
                 >
-                  <div className="flex gap-4 md:gap-6 animate-scroll-right-desktop pause-on-hover w-max lg:w-max lg:snap-none">
-                    {/* Duplicando o array apenas para o desktop (loop infinito) */}
+                  <div className="flex gap-4 md:gap-6 animate-scroll-right pause-on-hover w-max lg:w-max">
+                    {/* Duplicando o array para loop infinito fluido */}
                     {[...TESTIMONIAL_VIDEOS, ...TESTIMONIAL_VIDEOS].map((video, idx) => (
                       <div
                         key={`${video.id}-${idx}`}
-                        className="w-[260px] sm:w-[280px] md:w-[320px] snap-center lg:snap-align-none glass-card p-2 group/card hover:border-yellow-500/50 transition-colors duration-500 cursor-pointer"
+                        className="w-[260px] sm:w-[280px] md:w-[320px] lg:snap-align-none glass-card p-2 group/card hover:border-yellow-500/50 transition-colors duration-500 cursor-pointer"
                       >
                         <div className="aspect-[9/16] bg-slate-900 rounded-[1.5rem] flex items-center justify-center relative overflow-hidden shadow-2xl">
-                          {playingVideoKey === `testimonial-${idx}` ? (
-                            <div className="absolute inset-0 w-full h-full overflow-hidden">
-                              <button 
-                                onClick={(e) => { e.stopPropagation(); setPlayingVideoKey(null); }}
-                                className="absolute top-4 right-4 z-[30] w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center backdrop-blur-md border border-white/20 active:scale-95 transition-all shadow-xl"
-                              >
-                                <X className="w-6 h-6" />
-                              </button>
-                              <div className="absolute inset-0 w-full h-full scale-[1.1] origin-center">
-                                <iframe 
-                                  src={`https://www.youtube.com/embed/${video.id}?autoplay=1&playsinline=1&enablejsapi=1&modestbranding=1&rel=0&iv_load_policy=3&controls=0&disablekb=1&widgetid=1`} 
-                                  className="w-full h-full"
-                                  allow="autoplay; encrypted-media"
-                                />
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="w-full h-full relative flex items-center justify-center" onClick={() => setPlayingVideoKey(`testimonial-${idx}`)}>
-                              <img 
-                                src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`} 
-                                className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity"
-                                alt="Depoimento Cliente"
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                              <div className="w-20 h-20 rounded-full glass-card bg-black/40 flex items-center justify-center border-white/20 group-hover/card:bg-yellow-500 group-hover/card:border-yellow-400 group-hover/card:scale-110 transition-all duration-300 z-10 shadow-2xl">
-                                <Play className="w-8 h-8 text-white fill-white ml-1" />
-                              </div>
-                            </div>
-                          )}
+                          <iframe 
+                            src={`https://www.youtube.com/embed/${video.id}?controls=1&modestbranding=0&rel=0&iv_load_policy=3&disablekb=0`} 
+                            className="w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            loading="lazy"
+                          />
                         </div>
                       </div>
                     ))}
@@ -508,44 +451,21 @@ export default function Home() {
               <div className="relative group/parent">
                 <div
                   ref={carousel2Ref}
-                  className="w-full overflow-x-auto no-scrollbar snap-x snap-mandatory lg:overflow-visible"
+                  className="w-full overflow-hidden no-scrollbar lg:overflow-visible"
                 >
-                  <div className="flex gap-4 md:gap-6 animate-scroll-left-desktop pause-on-hover w-max lg:w-max lg:snap-none">
+                  <div className="flex gap-4 md:gap-6 animate-scroll-left pause-on-hover w-max lg:w-max">
                     {[...CASE_VIDEOS, ...CASE_VIDEOS].map((video, idx) => (
                       <div
                         key={`${video.id}-${idx}`}
-                        className="w-[260px] sm:w-[280px] md:w-[320px] snap-center lg:snap-align-none glass-card p-2 group/card hover:border-red-500/50 transition-colors duration-500 cursor-pointer relative"
+                        className="w-[260px] sm:w-[280px] md:w-[320px] glass-card p-2 group/card hover:border-red-500/50 transition-colors duration-500 cursor-pointer relative"
                       >
                         <div className="aspect-[9/16] bg-slate-900 rounded-[1.5rem] flex items-center justify-center relative overflow-hidden shadow-2xl">
-                          {playingVideoKey === `case-${idx}` ? (
-                            <div className="absolute inset-0 w-full h-full overflow-hidden">
-                              <button 
-                                onClick={(e) => { e.stopPropagation(); setPlayingVideoKey(null); }}
-                                className="absolute top-4 right-4 z-[30] w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center backdrop-blur-md border border-white/20 active:scale-95 transition-all shadow-xl"
-                              >
-                                <X className="w-6 h-6" />
-                              </button>
-                              <div className="absolute inset-0 w-full h-full scale-[1.1] origin-center">
-                                <iframe 
-                                  src={`https://www.youtube.com/embed/${video.id}?autoplay=1&playsinline=1&enablejsapi=1&modestbranding=1&rel=0&iv_load_policy=3&controls=0&disablekb=1&widgetid=1`} 
-                                  className="w-full h-full"
-                                  allow="autoplay; encrypted-media"
-                                />
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="w-full h-full relative flex items-center justify-center" onClick={() => setPlayingVideoKey(`case-${idx}`)}>
-                              <img 
-                                src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`} 
-                                className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity"
-                                alt="Depoimento INSS"
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                              <div className="w-20 h-20 rounded-full glass-card bg-black/40 flex items-center justify-center border-white/20 group-hover/card:bg-red-500 group-hover/card:border-red-400 group-hover/card:scale-110 transition-all duration-300 z-10 shadow-2xl">
-                                <Play className="w-8 h-8 text-white fill-white ml-1" />
-                              </div>
-                            </div>
-                          )}
+                          <iframe 
+                            src={`https://www.youtube.com/embed/${video.id}?autoplay=1&mute=1&loop=1&playlist=${video.id}&controls=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1`} 
+                            className="w-full h-full pointer-events-none"
+                            allow="autoplay; encrypted-media"
+                            loading="lazy"
+                          />
                         </div>
                       </div>
                     ))}
@@ -573,12 +493,17 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="text-center pt-8 md:pt-12 relative z-30 px-4">
-              <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="inline-block w-full max-w-sm md:max-w-none">
-                <Button className="btn-primary md:text-xl w-full md:w-auto !whitespace-normal break-words !px-4 md:!px-10 shadow-[0_0_50px_rgba(234,179,8,0.3)] animate-pulse hover:animate-none">
-                  Quero esse resultado na minha obra
-                </Button>
-              </a>
+            <div className="text-center pt-16 md:pt-24 relative z-30 px-4">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
+                className="btn-custom-wrapper"
+              >
+                <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
+                  <Button className="btn-primary">Quero esse resultado na minha obra</Button>
+                </a>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -626,23 +551,41 @@ export default function Home() {
             <div className="w-full max-w-[1400px] mx-auto relative group/parent overflow-hidden">
               <div
                 ref={carousel3Ref}
-                className="w-full overflow-x-auto no-scrollbar snap-x snap-mandatory lg:overflow-visible"
+                className="w-full overflow-hidden no-scrollbar lg:overflow-visible"
               >
-                <div className="flex gap-4 md:gap-5 animate-scroll-right-desktop pause-on-hover w-max lg:w-max lg:snap-none py-10 px-4">
+                <div className="flex gap-4 md:gap-5 animate-scroll-right pause-on-hover w-max lg:w-max py-10 px-4">
                   {[1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5].map((item, idx) => (
                     <Dialog key={`${item}-${idx}`}>
                       <DialogTrigger asChild>
                         <div
-                          className="w-[280px] sm:w-[300px] md:w-[310px] snap-center lg:snap-align-none cursor-pointer group/card"
+                          className="w-[280px] sm:w-[300px] md:w-[310px] lg:snap-align-none cursor-pointer group/card"
                         >
-                          <div className="glass-card p-2 hover:border-red-500/50 transition-all duration-500">
-                            <div className="aspect-[9/16] bg-slate-900 rounded-[1.5rem] flex items-center justify-center relative overflow-hidden shadow-2xl">
+                          <div className="glass-card p-2 hover:border-red-500/50 transition-all duration-500 relative">
+                            {/* Texto informativo superior */}
+                            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 bg-black/60 backdrop-blur-md text-[9px] font-black tracking-widest text-white px-3 py-1 rounded-full border border-white/10 opacity-0 group-hover/card:opacity-100 transition-opacity whitespace-nowrap shadow-xl">
+                              CLIQUE PARA AMPLIAR
+                            </div>
+
+                            <div className="aspect-[4/5] bg-slate-950 rounded-[1.5rem] flex items-center justify-center relative overflow-hidden shadow-2xl border border-white/5">
                               <img
-                                src={`/inss-de-obras/${item}.png`}
-                                className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover/card:opacity-100 group-hover/card:scale-105 transition-all duration-500"
+                                src={`/inss-de-obras/${item}.webp`}
+                                className="w-full h-full object-contain opacity-90 p-3 group-hover/card:opacity-100 group-hover/card:scale-[1.03] transition-all duration-500"
                                 alt={`Alerta e-CAC ${item}`}
                               />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                              
+                              {/* Overlay de hover com ícone de expansão */}
+                              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/card:opacity-100 transition-opacity flex items-center justify-center">
+                                <div className="p-3 rounded-full bg-red-600 shadow-2xl scale-50 group-hover/card:scale-100 transition-transform duration-500">
+                                   <Search className="w-6 h-6 text-white" />
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Informe visual persistente na base (opcional, para ser mais claro) */}
+                            <div className="mt-2 text-center">
+                               <p className="text-[10px] text-white/40 font-bold uppercase tracking-wider group-hover/card:text-red-400 transition-colors">
+                                 Clique para ampliar
+                               </p>
                             </div>
                           </div>
                         </div>
@@ -650,7 +593,7 @@ export default function Home() {
                       <DialogContent className="max-w-[95vw] sm:max-w-4xl p-0 bg-black/90 border-white/10 overflow-hidden sm:rounded-2xl">
                         <div className="relative aspect-auto max-h-[90vh] flex items-center justify-center">
                           <img
-                            src={`/inss-de-obras/${item}.png`}
+                            src={`/inss-de-obras/${item}.webp`}
                             className="max-w-full max-h-[90vh] object-contain"
                             alt="Alerta Ampliado"
                           />
@@ -689,12 +632,17 @@ export default function Home() {
           </div>
 
           {/* BOTÃO ISOLADO E CENTRALIZADO NO BOTTOM */}
-          <div className="w-full flex flex-col items-center justify-center pt-12 md:pt-20 px-4 relative z-20 text-center">
-            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="w-full max-w-[340px] md:max-w-lg">
-              <Button className="btn-primary w-full !whitespace-normal break-words transform hover:scale-105 shadow-[0_15px_40px_rgba(239,68,68,0.30)] bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white !px-8 py-5 md:py-6 h-auto">
-                👉 Ver se minha obra está na mira
-              </Button>
-            </a>
+          <div className="w-full flex flex-col items-center justify-center pt-20 md:pt-32 px-4 relative z-20 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.4, ease: "easeOut" }}
+              className="btn-custom-wrapper"
+            >
+              <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
+                <Button className="btn-danger-3d">👉 Ver se minha obra está na mira</Button>
+              </a>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -750,36 +698,15 @@ export default function Home() {
                       </div>
                     </div>
                     
-                    {/* Tela de Vídeo */}
-                    <div className="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center transition-colors z-10">
-                      {isTutorialPlaying ? (
-                         <div className="absolute inset-0 w-full h-full overflow-hidden">
-                           <button 
-                             onClick={(e) => { e.stopPropagation(); setIsTutorialPlaying(false); }}
-                             className="absolute top-6 md:top-10 right-6 md:right-10 z-[30] w-10 md:w-12 h-10 md:h-12 rounded-full bg-black/60 text-white flex items-center justify-center backdrop-blur-md border border-white/20 active:scale-95 transition-all shadow-xl"
-                           >
-                             <X className="w-6 md:w-8 h-6 md:h-8" />
-                           </button>
-                           <div className="absolute inset-0 scale-[1.05] origin-center">
-                             <iframe 
-                               src={`https://www.youtube.com/embed/JbIQ36XtK50?autoplay=1&playsinline=1&enablejsapi=1&modestbranding=1&rel=0&iv_load_policy=3&controls=0&disablekb=1&loop=1&playlist=JbIQ36XtK50`} 
-                               className="w-full h-full"
-                               allow="autoplay; encrypted-media"
-                             />
-                           </div>
-                         </div>
-                      ) : (
-                        <div className="w-full h-full relative flex flex-col items-center justify-center group/card">
-                          <img 
-                            src={`https://img.youtube.com/vi/JbIQ36XtK50/maxresdefault.jpg`} 
-                            className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"
-                            alt="Tutorial e-CAC"
-                          />
-                          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
-                          <Play className="w-16 h-16 md:w-24 md:h-24 text-yellow-500 opacity-90 group-hover:opacity-100 group-hover:scale-[1.15] transition-all duration-300 drop-shadow-[0_0_15px_rgba(234,179,8,0.5)] z-20" fill="currentColor" />
-                          <p className="mt-4 md:mt-6 text-white/90 font-bold tracking-widest uppercase text-[10px] md:text-sm z-20 border-b border-white/20 pb-2">Assista ao Tutorial</p>
+                    <div className="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center z-10">
+                        <div className="absolute inset-0 w-full h-full overflow-hidden">
+                           <iframe 
+                             src={`https://www.youtube.com/embed/JbIQ36XtK50?controls=1&modestbranding=0&rel=0&iv_load_policy=3&disablekb=0`} 
+                             className="w-full h-full"
+                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                             allowFullScreen
+                           />
                         </div>
-                      )}
                     </div>
                   </div>
 
@@ -829,12 +756,17 @@ export default function Home() {
             <p className="text-lg sm:text-xl md:text-2xl font-light text-white/70 leading-relaxed max-w-3xl">
               Descobrir o erro tarde demais custa caro. Entenda a situação da sua obra hoje e evite multas abusivas.
             </p>
-            <div className="pt-8">
-              <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
-                <Button className="btn-primary text-sm sm:text-base py-5 px-8 md:px-12 shadow-[0_0_40px_rgba(234,179,8,0.3)] hover:shadow-[0_0_60px_rgba(234,179,8,0.5)] leading-tight">
-                  Quero Falar com um <br className="sm:hidden" /> Especialista Agora
-                </Button>
-              </a>
+            <div className="pt-16 md:pt-20">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.5, ease: "easeOut" }}
+                className="btn-custom-wrapper"
+              >
+                <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
+                  <Button className="btn-primary">Quero Falar com um Especialista Agora</Button>
+                </a>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -845,7 +777,7 @@ export default function Home() {
         <div className="container max-w-5xl mx-auto flex flex-col items-center justify-center space-y-10">
           {/* Logo Central */}
           <div className="flex flex-col items-center">
-            <img src="logo-pratice.png" alt="Prátice Group" className="h-[2.5rem] w-auto object-contain opacity-90 mb-6" />
+            <img src="logo-pratice.webp" alt="Prátice Group" className="h-[2.5rem] w-auto object-contain opacity-90 mb-6" />
             <p className="text-center text-[#94A3B8] text-sm md:text-base font-light max-w-2xl leading-relaxed">
               Grupo Prátice | Regularização de INSS de obras em todo o Brasil. Mais de R$ 10 milhões economizados para donos de obras.
             </p>
@@ -954,7 +886,7 @@ export default function Home() {
             Nós utilizamos cookies e outras tecnologias para melhorar sua experiência e oferecer conteúdos personalizados de acordo com a LGPD.
           </p>
           <div className="flex gap-4">
-            <Button onClick={acceptCookies} className="btn-primary w-full text-xs font-black">ACEITAR TUDO</Button>
+            <Button onClick={acceptCookies} className="btn-cookie w-full text-xs font-black">ACEITAR TUDO</Button>
             <Link href="/politica-de-privacidade">
               <Button variant="ghost" className="text-white/40 hover:text-white text-xs font-bold">VER POLÍTICA</Button>
             </Link>
