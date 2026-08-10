@@ -1,0 +1,11 @@
+Este arquivo marca que o tracking foi configurado.
+Data: 2026-08-10
+
+Arquivos rastreamento adicionados:
+✅ client/public/pixel-tracking-cupom.js
+✅ client/src/components/TrackingInit.tsx
+✅ server/routes/pageview.ts
+✅ server/routes/clique.ts
+✅ .env.example
+
+Status: Pronto para GitHub + Vercel

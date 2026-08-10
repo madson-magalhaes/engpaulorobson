@@ -4,6 +4,7 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch, Router as WouterRouter } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { TrackingInit } from "./components/TrackingInit";
 import Home from "./pages/Home";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
@@ -29,6 +30,7 @@ function App() {
         defaultTheme="dark"
       >
         <TooltipProvider>
+          <TrackingInit />
           <Toaster />
           <Router />
         </TooltipProvider>

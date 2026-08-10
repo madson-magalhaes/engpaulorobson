@@ -822,7 +822,7 @@ export default function Home() {
             <a href="mailto:inssdeobra@engpaulorobson.com.br" className="w-10 h-10 border border-white/10 rounded-full flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all">
               <Mail className="w-4 h-4" />
             </a>
-            <a href="https://wa.me/5588999244628?text=Vim%20pelo%20INSS%20de%20Obras%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20desconto%20da%20Receita%20Federal." target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/10 rounded-full flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all">
+            <a href="#" data-track-wpp target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/10 rounded-full flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all">
               <MessageCircle className="w-4 h-4" />
             </a>
           </div>
@@ -853,7 +853,7 @@ export default function Home() {
             <p className="text-[#475569] text-[10px] md:text-xs font-bold tracking-widest uppercase text-center md:text-left">
               © 2026 PRÁTICE GROUP. TODOS OS DIREITOS RESERVADOS.
             </p>
-            <a href="https://wa.me/5588996208778?text=Olá,%20vi%20o%20seu%20trabalho%20no%20site%20do%20Dr%20Paulo%20Robson,%20e%20gostaria%20de%20um%20orçamento%20pra%20mim!" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 border border-white/10 bg-white/[0.02] rounded-full px-5 py-2.5 hover:bg-white/5 hover:border-yellow-500/30 transition-all cursor-pointer group">
+            <a href="#" data-track-wpp target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 border border-white/10 bg-white/[0.02] rounded-full px-5 py-2.5 hover:bg-white/5 hover:border-yellow-500/30 transition-all cursor-pointer group">
               <span className="w-1.5 h-1.5 rounded-full bg-yellow-500 group-hover:animate-pulse"></span>
               <span className="text-[#64748B] group-hover:text-white text-[10px] md:text-xs font-bold tracking-widest transition-colors uppercase">DESENVOLVIDO POR DEV WILLIAM RIBEIRO</span>
             </a>
