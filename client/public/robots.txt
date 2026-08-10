@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://engpaulorobson.com.br/inss-de-obras/sitemap.xml

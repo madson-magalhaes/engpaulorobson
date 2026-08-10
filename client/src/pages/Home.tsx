@@ -11,7 +11,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
  * Paleta: Slate Escuro (#020617) + Dourado (#EAB308) + Glassmorphism
  */
 
-const WHATSAPP_LINK = "https://wa.me/5585987244624?text=Quero%20saber%20mais%20da%20regulariza%C3%A7%C3%A3o%20de%20INSS%20e%20receber%20meu%20diagn%C3%B3stico%20gratuito.";
+const WHATSAPP_LINK = "https://wa.me/5588999244628?text=Vim%20pela%20p%C3%A1gina%20de%20INSS%20de%20obras%20do%20Eng%20Paulo%20Robson%20e%20gostaria%20de%20descobrir%20qual%20o%20valor%20do%20meu%20desconto%20com%20a%20Receita%20Federal%3F";
 
 const TESTIMONIAL_VIDEOS = [
   { id: "c0re4dk8nYg" },
@@ -102,7 +102,7 @@ export default function Home() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleResize);
-    
+
     // Initial call
     handleResize();
 
@@ -118,12 +118,14 @@ export default function Home() {
       <section className="relative min-h-screen flex flex-col lg:justify-center pt-0 lg:pt-20 pb-20 overflow-hidden bg-[#020617]">
 
         {/* IMAGEM MOBILE EXCLUSIVA */}
-        <div
-          className="w-full h-[50vh] min-h-[400px] lg:hidden bg-cover bg-top bg-no-repeat relative z-0"
-          style={{ backgroundImage: "url('hero-01-mobile.webp')" }}
-        >
+        <div className="relative w-full lg:hidden z-0">
+          <img
+            src="hero-01-mobile.webp"
+            alt="Eng. Paulo Robson"
+            className="w-full h-auto block"
+          />
           {/* Sombra para integrar suavemente a foto com o fundo escuro abaixo */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/20 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/60 to-transparent"></div>
         </div>
 
         {/* IMAGEM DESKTOP EXCLUSIVA */}
@@ -134,21 +136,21 @@ export default function Home() {
           {/* Fundo mantido em design original: Sem overlay de gradiente, pois a imagem natural já possui fundo escuro para leitura */}
         </div>
 
-        <div className="container relative z-10 mt-[-40px] lg:mt-0 pt-10 lg:pt-0 w-full">
+        <div className="container relative z-10 mt-[-120px] lg:mt-0 pt-10 lg:pt-0 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-6 md:space-y-8 animate-fade-in-up text-center lg:text-left flex flex-col items-center lg:items-start">
-              <img src="logo-pratice.webp" alt="Prátice Group" className="w-[320px] md:w-[380px] h-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.05)] mb-2" />
+              <img src="logo-pratice.webp" alt="Eng. Paulo Robson - Grupo Prátice | Especialistas em redução de INSS de obras" fetchPriority="high" className="w-[320px] md:w-[380px] h-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.05)] mb-2" />
 
               <div className="pill-badge">
                 <span className="w-2 h-2 rounded-full bg-yellow-400 mr-2 animate-pulse"></span>
                 OPORTUNIDADE DE ECONOMIA NA CONSTRUÇÃO
               </div>
-              <h1 className="headline text-white drop-shadow-sm text-4xl sm:text-5xl lg:text-[4rem]">
-                Tem obra economizando mais de <span className="highlight-yellow">R$ 50 mil</span> <br />
-                <span className="text-white/50 text-2xl sm:text-3xl md:text-5xl font-semibold mt-2 block">sem mudar nada no projeto.</span>
+              <h1 className="headline text-white drop-shadow-sm text-3xl sm:text-4xl lg:text-[3.2rem] leading-[1.1]">
+                Receita Federal libera <span className="highlight-yellow">desconto de até 82%</span>{' '}
+                <span className="text-white/70 font-semibold inline-block">no imposto do INSS de obras.</span>
               </h1>
               <p className="subheadline max-w-xl text-white/80">
-                Você já sabe quanto pode economizar no imposto da CND do INSS de obras?
+                O benefício se enquadra apenas para <strong className="text-yellow-400 font-semibold">obras com alvarás de 2021 em diante</strong> e que ainda não receberam multas com inscrição na dívida ativa.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-6">
                 <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-custom-wrapper">
@@ -193,15 +195,15 @@ export default function Home() {
               </div>
 
               <h2 className="headline text-3xl sm:text-4xl lg:text-[3rem] text-white">
-                A maioria dos donos de obra <span className="highlight-yellow">não faz ideia</span> de como o INSS é calculado.
+                A maioria dos donos de obra <span className="highlight-yellow">estão perdendo</span> esse desconto por falta de informação.
               </h2>
 
               <div className="space-y-6 text-base md:text-lg text-white/75 font-light leading-relaxed max-w-2xl">
                 <p>
-                  E por isso, recebem uma guia de cobrança e acabam pagando valores muito acima do necessário — sem questionar, sem perceber.
+                  Na construção civil, a falta de estratégia na regularização de obra faz com que você pague guias de cobrança altíssimas — ignorando o seu direito a uma grande redução tributária.
                 </p>
                 <p className="pl-6 border-l-2 border-yellow-500 bg-gradient-to-r from-yellow-500/5 to-transparent py-4 text-white/90 text-left">
-                  <strong className="text-white font-medium">O valor do INSS da obra não é fixo.</strong> Ele depende diretamente de como a sua obra é apresentada à prefeitura, enquadrada no alvará e informada no CNO.
+                  <strong className="text-white font-medium">O valor do INSS da obra não é fixo.</strong> O seu desconto na Receita Federal depende diretamente de como a sua construção é apresentada à prefeitura e informada no CNO.
                 </p>
               </div>
 
@@ -233,14 +235,15 @@ export default function Home() {
 
             {/* Tela de Vídeo */}
             <div className="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center z-10">
-                <div className="absolute inset-0 w-full h-full overflow-hidden">
-                  <iframe
-                    src={`https://www.youtube.com/embed/94zZdAkMh-M?controls=1&modestbranding=0&rel=0&iv_load_policy=3&disablekb=0`}
-                    className="w-full h-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
+              <div className="absolute inset-0 w-full h-full overflow-hidden">
+                <iframe
+                  src={`https://www.youtube.com/embed/94zZdAkMh-M?controls=1&modestbranding=0&rel=0&iv_load_policy=3&disablekb=0`}
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  loading="lazy"
+                />
+              </div>
             </div>
             {/* Barra de Home IOS */}
             <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-28 h-1 bg-white/20 rounded-full z-30"></div>
@@ -256,23 +259,45 @@ export default function Home() {
               <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-amber-200 bg-amber-50 text-amber-600 font-bold text-sm tracking-wide">
                 ESTRATÉGIA INTELIGENTE
               </div>
-              <h2 className="headline text-3xl sm:text-4xl lg:text-[3rem] text-slate-900">
-                É exatamente aí que surgem as <span className="text-amber-500 block lg:inline">melhores oportunidades</span>.
+              <h2 className="headline text-3xl sm:text-4xl lg:text-[3rem] text-slate-900 font-black">
+                É isso que eu vou fazer pela <span className="text-amber-500 block lg:inline">sua obra também!</span>
               </h2>
               <div className="space-y-6 text-lg text-slate-600 font-medium leading-relaxed">
                 <p>
-                  Obras idênticas podem ter valores de impostos completamente diferentes — dependendo apenas de como o processo de regularização é conduzido no fisco.
+                  Duas obras parecidas podem pagar valores completamente diferentes de INSS — tudo depende de como a regularização é feita na Receita Federal.
                 </p>
 
-                {/* Destaque Modernizado Claro */}
-                <div className="bg-slate-50 border border-slate-100 border-l-4 border-l-amber-500 p-6 md:p-8 rounded-xl shadow-[0_4px_25px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-shadow cursor-default">
-                  <p className="text-4xl font-black text-slate-900 leading-tight">De R$ 13.000,00 <br /><span className="text-amber-500 text-3xl">por apenas 5x de R$ 160,00</span></p>
-                  <p className="text-xs md:text-sm tracking-widest uppercase text-slate-400 mt-3 font-bold">Baseado em caso real validado no SERO</p>
+                {/* Destaque Premium com Riscado em Vermelho */}
+                <div className="bg-gradient-to-br from-amber-50 to-white border border-amber-100 border-l-8 border-l-amber-500 p-8 md:p-10 rounded-2xl shadow-[0_10px_40px_rgba(234,179,8,0.1)] hover:shadow-[0_15px_50px_rgba(234,179,8,0.15)] transition-all duration-500 cursor-default group relative overflow-hidden my-6">
+                  {/* Elemento decorativo de fundo */}
+                  <div className="absolute -right-4 -bottom-4 w-32 h-32 bg-amber-500/5 rounded-full blur-3xl group-hover:bg-amber-500/10 transition-colors"></div>
+
+                  <p className="text-sm font-bold text-amber-600 uppercase tracking-widest mb-4 flex items-center gap-2">
+                    <span className="w-8 h-px bg-amber-200"></span>
+                    Exemplo de Economia Real
+                  </p>
+
+                  <div className="space-y-2">
+                    <p className="text-2xl md:text-3xl font-medium text-slate-400 line-through decoration-red-500 decoration-[3px] opacity-80">De R$ 13.000,00</p>
+                    <p className="text-4xl md:text-5xl font-black text-slate-900 leading-tight flex flex-col md:block">
+                      <span className="text-xl md:text-2xl font-bold opacity-70 mb-1">Por apenas</span> <span className="text-amber-600 underline decoration-amber-500/30 decoration-4 md:decoration-8 underline-offset-4">5x de R$ 160,00</span>
+                    </p>
+                  </div>
+
+                  <div className="mt-6 pt-6 border-t border-amber-100 flex items-center">
+                    <p className="text-[10px] md:text-xs tracking-widest uppercase text-amber-600/70 font-black">Caso real validado via SERO / Receita Federal</p>
+                  </div>
                 </div>
 
-                <p>
-                  Isso <strong className="text-slate-900 bg-slate-100 px-1 rounded">não depende</strong> de trocar material ou alterar o projeto de engenharia. O resultado massivo vem da <strong className="text-amber-600">inteligência tributária</strong>.
-                </p>
+                <div className="space-y-4 pt-2">
+                  <p className="font-bold text-slate-900">E o melhor:</p>
+                  <p>
+                    Você <strong className="text-slate-900">não precisa</strong> mudar o projeto, trocar material ou alterar a obra.
+                  </p>
+                  <p>
+                    A grande diferença está na forma como o processo é conduzido e na <strong className="text-amber-600">estratégia utilizada</strong> na regularização tributária.
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -291,14 +316,14 @@ export default function Home() {
 
                 {/* Tela de Vídeo */}
                 <div className="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center z-10">
-                    <div className="absolute inset-0 w-full h-full overflow-hidden">
-                      <iframe
-                        src={`https://www.youtube.com/embed/94zZdAkMh-M?controls=1&modestbranding=0&rel=0&iv_load_policy=3&disablekb=0`}
-                        className="w-full h-full"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
-                    </div>
+                  <div className="absolute inset-0 w-full h-full overflow-hidden">
+                    <iframe
+                      src={`https://www.youtube.com/embed/94zZdAkMh-M?controls=1&modestbranding=0&rel=0&iv_load_policy=3&disablekb=0`}
+                      className="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
                 </div>
 
                 {/* Barra de Home IOS */}
@@ -346,7 +371,7 @@ export default function Home() {
               </h2>
               <div className="space-y-6">
                 {[
-                  "Já gerou mais de R$ 10 milhões em economia para donos de obras em todo o Brasil.",
+                  "Já gerou mais de R$ 15 milhões em economia para donos de obras em todo o Brasil.",
                   "Atua diretamente do lado do governo como coordenador de licenciamento de obras, justamente onde nasce a cobrança.",
                   "E conhecendo os dois lados da moeda, o eng. Paulo Robson sabe exatamente onde moram os maiores erros de engenheiros, arquitetos, contadores e das próprias prefeituras."
                 ].map((text, i) => (
@@ -358,9 +383,9 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              <div className="pt-4">
-                <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-custom-wrapper">
-                  <Button className="btn-primary">Falar com Paulo Robson</Button>
+              <div className="pt-4 flex justify-center lg:justify-start w-full">
+                <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-custom-wrapper lg:origin-left">
+                  <Button className="btn-primary !px-6 md:!px-10">Falar com o time do Paulo Robson</Button>
                 </a>
               </div>
             </div>
@@ -405,8 +430,8 @@ export default function Home() {
                         className="w-[260px] sm:w-[280px] md:w-[320px] lg:snap-align-none glass-card p-2 group/card hover:border-yellow-500/50 transition-colors duration-500 cursor-pointer"
                       >
                         <div className="aspect-[9/16] bg-slate-900 rounded-[1.5rem] flex items-center justify-center relative overflow-hidden shadow-2xl">
-                          <iframe 
-                            src={`https://www.youtube.com/embed/${video.id}?controls=1&modestbranding=0&rel=0&iv_load_policy=3&disablekb=0`} 
+                          <iframe
+                            src={`https://www.youtube.com/embed/${video.id}?controls=1&modestbranding=0&rel=0&iv_load_policy=3&disablekb=0`}
                             className="w-full h-full"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             loading="lazy"
@@ -460,8 +485,8 @@ export default function Home() {
                         className="w-[260px] sm:w-[280px] md:w-[320px] glass-card p-2 group/card hover:border-red-500/50 transition-colors duration-500 cursor-pointer relative"
                       >
                         <div className="aspect-[9/16] bg-slate-900 rounded-[1.5rem] flex items-center justify-center relative overflow-hidden shadow-2xl">
-                          <iframe 
-                            src={`https://www.youtube.com/embed/${video.id}?autoplay=1&mute=1&loop=1&playlist=${video.id}&controls=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1`} 
+                          <iframe
+                            src={`https://www.youtube.com/embed/${video.id}?autoplay=1&mute=1&loop=1&playlist=${video.id}&controls=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1`}
                             className="w-full h-full pointer-events-none"
                             allow="autoplay; encrypted-media"
                             loading="lazy"
@@ -501,7 +526,7 @@ export default function Home() {
                 className="btn-custom-wrapper"
               >
                 <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
-                  <Button className="btn-primary">Quero esse resultado na minha obra</Button>
+                  <Button className="btn-primary">Quero receber o desconto da receita federal</Button>
                 </a>
               </motion.div>
             </div>
@@ -516,13 +541,14 @@ export default function Home() {
           <div className="flex flex-col items-center text-center space-y-12">
 
             {/* Topo: Texto Centralizado */}
-            <div className="max-w-3xl space-y-6 md:space-y-10 animate-fade-in-up flex flex-col items-center mb-8 md:mb-12">
+            <div className="max-w-5xl space-y-6 md:space-y-10 animate-fade-in-up flex flex-col items-center mb-8 md:mb-12">
               <div className="pill-badge border-red-500/30 text-red-400 bg-red-500/10">
                 ALERTA VERMELHO
               </div>
 
               <h2 className="headline text-3xl sm:text-4xl lg:text-[3.5rem] text-white leading-tight">
-                O que muita gente ainda não percebeu: hoje, a Receita Federal <span className="text-red-500 block">não envia mais cartas</span> pelos Correios.
+                O que muita gente ainda não percebeu: <br className="hidden md:block" /> hoje, a Receita Federal
+                <span className="text-red-500 block mt-4">não envia mais cartas com aviso <br className="hidden md:block" /> pelos Correios.</span>
               </h2>
 
               <p className="text-xl md:text-2xl text-white/90 font-light leading-relaxed">
@@ -530,7 +556,7 @@ export default function Home() {
               </p>
 
               <p className="text-lg text-yellow-500 font-medium italic border-l-2 border-yellow-500 pl-4 bg-yellow-500/5 py-4 max-w-2xl">
-                "E fala a verdade… Quantas vezes você já entrou no e-CAC para conferir isso este mês?"
+                "E quando você não descobre a tempo... A multa triplica o valor de cobrança"
               </p>
 
               <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 pt-8 border-t border-white/10">
@@ -571,21 +597,22 @@ export default function Home() {
                                 src={`/inss-de-obras/${item}.webp`}
                                 className="w-full h-full object-contain opacity-90 p-3 group-hover/card:opacity-100 group-hover/card:scale-[1.03] transition-all duration-500"
                                 alt={`Alerta e-CAC ${item}`}
+                                loading="lazy"
                               />
-                              
+
                               {/* Overlay de hover com ícone de expansão */}
                               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/card:opacity-100 transition-opacity flex items-center justify-center">
                                 <div className="p-3 rounded-full bg-red-600 shadow-2xl scale-50 group-hover/card:scale-100 transition-transform duration-500">
-                                   <Search className="w-6 h-6 text-white" />
+                                  <Search className="w-6 h-6 text-white" />
                                 </div>
                               </div>
                             </div>
 
                             {/* Informe visual persistente na base (opcional, para ser mais claro) */}
                             <div className="mt-2 text-center">
-                               <p className="text-[10px] text-white/40 font-bold uppercase tracking-wider group-hover/card:text-red-400 transition-colors">
-                                 Clique para ampliar
-                               </p>
+                              <p className="text-[10px] text-white/40 font-bold uppercase tracking-wider group-hover/card:text-red-400 transition-colors">
+                                Clique para ampliar
+                              </p>
                             </div>
                           </div>
                         </div>
@@ -640,7 +667,7 @@ export default function Home() {
               className="btn-custom-wrapper"
             >
               <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
-                <Button className="btn-danger-3d">👉 Ver se minha obra está na mira</Button>
+                <Button className="btn-danger-3d">👉 Quero saber se minha obra está na mira</Button>
               </a>
             </motion.div>
           </div>
@@ -697,16 +724,17 @@ export default function Home() {
                         <div className="w-0.5 h-0.5 rounded-full bg-blue-400"></div>
                       </div>
                     </div>
-                    
+
                     <div className="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center z-10">
-                        <div className="absolute inset-0 w-full h-full overflow-hidden">
-                           <iframe 
-                             src={`https://www.youtube.com/embed/JbIQ36XtK50?controls=1&modestbranding=0&rel=0&iv_load_policy=3&disablekb=0`} 
-                             className="w-full h-full"
-                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                             allowFullScreen
-                           />
-                        </div>
+                      <div className="absolute inset-0 w-full h-full overflow-hidden">
+                        <iframe
+                          src={`https://www.youtube.com/embed/JbIQ36XtK50?controls=1&modestbranding=0&rel=0&iv_load_policy=3&disablekb=0`}
+                          className="w-full h-full"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          loading="lazy"
+                        />
+                      </div>
                     </div>
                   </div>
 
@@ -736,7 +764,7 @@ export default function Home() {
               <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
                 <Button className="btn-primary transform md:scale-110 shadow-[0_20px_50px_rgba(234,179,8,0.25)] flex items-center gap-3">
                   <svg className="w-6 h-6 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.711.927 3.142.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.761-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.666.598 1.236.771 1.409.858.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.031 22.086c-1.782 0-3.529-.46-5.06-1.332l-5.63 1.48 1.506-5.485c-.961-1.583-1.47-3.396-1.47-5.253 0-5.556 4.52-10.076 10.076-10.076 5.557 0 10.077 4.52 10.077 10.076s-4.52 10.076-10.076 10.076z" /></svg>
-                  Me chama no WhatsApp agora
+                  Aproveite o desconto da receita federal
                 </Button>
               </a>
             </div>
@@ -777,9 +805,9 @@ export default function Home() {
         <div className="container max-w-5xl mx-auto flex flex-col items-center justify-center space-y-10">
           {/* Logo Central */}
           <div className="flex flex-col items-center">
-            <img src="logo-pratice.webp" alt="Prátice Group" className="h-[2.5rem] w-auto object-contain opacity-90 mb-6" />
+            <img src="logo-pratice.webp" alt="Grupo Prátice - Redução e desconto de INSS na Receita Federal" loading="lazy" className="h-[2.5rem] w-auto object-contain opacity-90 mb-6" />
             <p className="text-center text-[#94A3B8] text-sm md:text-base font-light max-w-2xl leading-relaxed">
-              Grupo Prátice | Regularização de INSS de obras em todo o Brasil. Mais de R$ 10 milhões economizados para donos de obras.
+              Grupo Prátice | Regularização de INSS de obras em todo o Brasil. Mais de R$ 15 milhões economizados para donos de obras.
             </p>
           </div>
 
@@ -794,7 +822,7 @@ export default function Home() {
             <a href="mailto:inssdeobra@engpaulorobson.com.br" className="w-10 h-10 border border-white/10 rounded-full flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all">
               <Mail className="w-4 h-4" />
             </a>
-            <a href="https://wa.me/5585987244624?text=Quero%20saber%20mais%20da%20regulariza%C3%A7%C3%A3o%20de%20INSS%20e%20receber%20meu%20diagn%C3%B3stico%20gratuito." target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/10 rounded-full flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all">
+            <a href="https://wa.me/5588999244628?text=Vim%20pelo%20INSS%20de%20Obras%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20desconto%20da%20Receita%20Federal." target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/10 rounded-full flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all">
               <MessageCircle className="w-4 h-4" />
             </a>
           </div>
@@ -832,21 +860,21 @@ export default function Home() {
           </div>
         </div>
       </footer>
-      
+
       {/* BOTÃO FLUTUANTE WHATSAPP (FIXO) */}
       <div className="fixed bottom-10 right-6 z-[110] group">
-        <a 
-          href={WHATSAPP_LINK} 
-          target="_blank" 
+        <a
+          href={WHATSAPP_LINK}
+          target="_blank"
           rel="noopener noreferrer"
           className="relative flex items-center justify-center w-16 h-16 bg-[#25D366] text-white rounded-full shadow-[0_15px_40px_rgba(37,211,102,0.4)] hover:scale-110 active:scale-95 transition-all duration-500 transform-gpu"
           aria-label="Fale conosco no WhatsApp"
         >
           {/* Logo Oficial WhatsApp SVG */}
           <svg className="w-10 h-10 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
           </svg>
-          
+
           {/* Indicador Online Pulsante (Bolinha Superior) */}
           <span className="absolute -top-1 -right-1 flex h-5 w-5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-80"></span>
