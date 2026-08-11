@@ -19,11 +19,8 @@ async function startServer() {
   app.use(pageviewRouter);
   app.use(cliqueRouter);
 
-  // Serve static files from dist/public in production
-  const staticPath =
-    process.env.NODE_ENV === "production"
-      ? path.resolve(__dirname, "public")
-      : path.resolve(__dirname, "..", "dist", "public");
+  // Serve static files from dist/inss-de-obras (Vite output)
+  const staticPath = path.resolve(__dirname, "..", "inss-de-obras");
 
   app.use(express.static(staticPath));
 
