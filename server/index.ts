@@ -19,13 +19,18 @@ async function startServer() {
   app.use(pageviewRouter);
   app.use(cliqueRouter);
 
-  // Serve static files from dist (Vite output)
-  const staticPath = path.resolve(__dirname, "..", "dist");
+  // Serve static files - Vite coloca em dist/inss-de-obras
+  const staticPath = path.resolve(__dirname, "..", "inss-de-obras");
   app.use(express.static(staticPath));
 
-  // Handle client-side routing - serve index.html for all routes
+  // Handle client-side routing - serve index.html para todas as rotas
   app.get("*", (_req, res) => {
-    res.sendFile(path.join(staticPath, "inss-de-obras", "index.html"));
+    res.sendFile(path.join(staticPath, "index.html"), (err) => {
+      if (err) {
+        console.error("Erro ao servir index.html:", err);
+        res.status(404).send("index.html not found");
+      }
+    });
   });
 
   const port = process.env.PORT || 3000;
