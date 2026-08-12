@@ -15,22 +15,17 @@ async function startServer() {
   // Middleware
   app.use(express.json());
 
-  // Routes - Tracking API (deve vir ANTES do static files)
+  // Routes - Tracking API (ANTES de static files)
   app.use(pageviewRouter);
   app.use(cliqueRouter);
 
-  // Serve static files - Vite coloca em dist/inss-de-obras
-  const staticPath = path.resolve(__dirname, "..", "inss-de-obras");
-  app.use(express.static(staticPath));
+  // Serve static files
+  const distPath = path.resolve(__dirname, "..");
+  app.use(express.static(distPath));
 
-  // Handle client-side routing - serve index.html para todas as rotas
+  // Fallback para index.html (client-side routing)
   app.get("*", (_req, res) => {
-    res.sendFile(path.join(staticPath, "index.html"), (err) => {
-      if (err) {
-        console.error("Erro ao servir index.html:", err);
-        res.status(404).send("index.html not found");
-      }
-    });
+    res.sendFile(path.join(distPath, "inss-de-obras", "index.html"));
   });
 
   const port = process.env.PORT || 3000;
