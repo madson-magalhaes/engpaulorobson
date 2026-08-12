@@ -19,13 +19,13 @@ async function startServer() {
   app.use(pageviewRouter);
   app.use(cliqueRouter);
 
-  // Serve static files
-  const distPath = path.resolve(__dirname, "..");
-  app.use(express.static(distPath));
+  // Serve static files SOMENTE da pasta da landing page (não da raiz de dist/)
+  const landingPath = path.resolve(__dirname, "..", "inss-de-obras");
+  app.use(express.static(landingPath));
 
   // Fallback para index.html (client-side routing)
   app.get("*", (_req, res) => {
-    res.sendFile(path.join(distPath, "inss-de-obras", "index.html"));
+    res.sendFile(path.join(landingPath, "index.html"));
   });
 
   const port = process.env.PORT || 3000;
