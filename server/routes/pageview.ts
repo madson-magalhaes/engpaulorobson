@@ -3,13 +3,16 @@ import { createClient } from '@supabase/supabase-js'
 
 const router = Router()
 
-const supabase = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+const getSupabase = () => {
+  return createClient(
+    process.env.SUPABASE_URL || '',
+    process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+  )
+}
 
 router.post('/api/pageview', async (req: Request, res: Response) => {
   try {
+    const supabase = getSupabase()
     const {
       ref_id,
       evento_type = 'pageview',
