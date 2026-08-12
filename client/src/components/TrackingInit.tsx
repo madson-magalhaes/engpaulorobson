@@ -27,6 +27,7 @@ export function TrackingInit() {
           tenantId: import.meta.env.VITE_TENANT_ID || 'paulo_robson',
           pixelId: import.meta.env.VITE_PIXEL_ID,
           whatsappNumber: import.meta.env.VITE_WHATSAPP_NUMBER,
+          whatsappMessage: import.meta.env.VITE_WHATSAPP_MESSAGE || 'Quero saber mais',
           pageviewUrl: import.meta.env.VITE_PAGEVIEW_URL || '/api/pageview',
           leadUrl: import.meta.env.VITE_LEAD_URL || '/api/clique',
         })

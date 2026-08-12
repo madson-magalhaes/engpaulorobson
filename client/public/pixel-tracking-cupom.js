@@ -11,10 +11,9 @@ class PixelTrackerCupom {
       tenantId: config.tenantId || "default",
       pixelId: config.pixelId,
       whatsappNumber: config.whatsappNumber,
+      whatsappMessage: config.whatsappMessage || "Quero saber mais",
       pageviewUrl: config.pageviewUrl || "/api/pageview",
       leadUrl: config.leadUrl || "/api/clique",
-      // Mensagem hardcoded no código (não vem do env)
-      whatsappMessage: "Vim pela página de INSS de obras do Eng Paulo Robson e gostaria de descobrir qual o valor do meu desconto com a Receita Federal",
       cupomPrefix: "cupom",
       ...config,
     };
@@ -57,7 +56,12 @@ class PixelTrackerCupom {
   }
 
   // Formata mensagem com cupom (ref_id)
+  // Suporta placeholder {cupom} na mensagem do .env
   formatMessageWithCupom(refId) {
+    // Se a mensagem tem {cupom}, substitui. Senão, append no final
+    if (this.config.whatsappMessage.includes('{cupom}')) {
+      return this.config.whatsappMessage.replace(/{cupom}/g, refId);
+    }
     return `${this.config.whatsappMessage}, número do meu ${this.config.cupomPrefix} promocional: ${refId}`;
   }
 
